@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+    <title>x-search</title>	
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />	
+	  <link rel="stylesheet" type="text/css" href="/css/offcanvas.css" />
+
+    <!-- libs -->
+	  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>    
+    <script src='//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script src='/js/lib/d3.min.js'></script>
+    <script src='/js/lib/hilitor.js'></script>
+
+    <!-- app -->
+	  <script src='/js/app/custom.js'></script>
+
+    <script>
+			var searchInterval = null;
+			var results = [];
+
+			$(document).ready(function () {
+				loadList();
+				viewList();
+				
+				$('[data-toggle="offcanvas"]').click(function () {
+					$('.row-offcanvas').toggleClass('active');
+				});
+
+			});
+
+    </script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-54144106-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+    		  <a class="navbar-link" id="myListLink" href="/" alt="search"><span class="glyphicon glyphicon-home"></span></a>
+    		  <a class="navbar-link" id="myListLink" href="calendar.html"calendar"><span class="glyphicon glyphicon-calendar"></span></a>		  
+          </div>
+        </div>
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->    
+    <div id="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-sm-11 col-xs-12">
+          <div class="row">
+            <div id="resultCount" class="col-sm-11 col-xs-12">         
+            </div><!--/span-->			
+          </div><!--/row-->
+          <div class="row">
+            <div id="results" class="col-sm-11 col-xs-12">         
+            </div><!--/span-->			
+          </div><!--/row-->		  				
+        </div><!--/span-->
+        <div class="hidden-xs col-sm-1 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div id="navList" class="list-group">
+          </div>        
+      </div><!--/row-->        
+    </div>
+</body>
+</html>	

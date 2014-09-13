@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+    <title>x-search</title>	
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />	
+	<link rel="stylesheet" type="text/css" href="/css/offcanvas.css" />
+
+   <style>
+		
+		#container {
+			height: 99%;
+		}
+				
+    </style>
+
+
+    <!-- libs -->
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>    
+    <script src='//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script src='/js/lib/d3.min.js'></script>
+    <script src='/js/lib/hilitor.js'></script>
+
+    <!-- app -->
+	<script src='/js/app/custom.js'></script>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-54144106-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+		  <a class="navbar-link" href="index.html"><span class="glyphicon glyphicon-home"></span></a>
+		  <a class="navbar-link" id="myListLink" href="list.html"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+		  <a class="navbar-link" id="myListLink" href="map.html"><span class="glyphicon glyphicon-map-marker"></span></a>		  
+        </div>
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->    
+    <div id="container">  <!-- insert grouped public calendar(s) from google calendar config page -->
+			<iframe src="https://www.google.com/calendar/embed?showPrint=0&amp;showTabs=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=r5s6c133gdj0ktfijl62var8fs%40group.calendar.google.com&amp;color=%23BE6D00&amp;src=9olb7629f98sv9iuc5dputntv4%40group.calendar.google.com&amp;color=%2342104A&amp;src=l0ru0i9ggvaqut5hs51m1mg0d8%40group.calendar.google.com&amp;color=%236E6E41&amp;src=8hqc5pfkpfq6g9iukpntlln2m0%40group.calendar.google.com&amp;color=%23AB8B00&amp;src=tjjvq16h0lb5007u7s3r61duqc%40group.calendar.google.com&amp;color=%23711616&amp;src=kttcpg35sfoelaa22ea87581j4%40group.calendar.google.com&amp;color=%232952A3&amp;src=mf3g6hbu46ruejtabruqk5efo8%40group.calendar.google.com&amp;color=%2328754E&amp;src=2erpuru0uum9rfov1ghkeoiu3k%40group.calendar.google.com&amp;color=%23333333&amp;src=r5iomu8kbein07al8ggr83unmg%40group.calendar.google.com&amp;color=%23aab987&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="100%" frameborder="0" scrolling="no"></iframe>		 
+    </div>
+</body>
+</html>	

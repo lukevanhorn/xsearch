@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+    <title>x-search</title>	
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />	
+	  <link rel="stylesheet" type="text/css" href="/css/offcanvas.css" />
+
+    <!-- libs -->
+	  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>    
+    <script src='//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script src='/js/lib/d3.min.js'></script>
+    <script src='/js/lib/hilitor.js'></script>
+
+    <!-- app -->
+	  <script src='/js/app/custom.js'></script>
+
+    <script>
+			var results = [];
+
+			$(document).ready(function () {
+				loadList();
+				showAlphabet();
+        
+				$('[data-toggle="offcanvas"]').click(function () {
+					$('.row-offcanvas').toggleClass('active');
+				});
+				
+				$("input[type=checkbox]").on('click', function() {
+					update();
+				});
+			});
+				
+      function showAlphabet()
+			{
+				var str = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9".split(',');
+
+					d3.select('#navMenu').selectAll('li.index').data(str).enter().append('li').append('a').attr('href', '#').text(function(d) { return d; });	
+					$("#navMenu a").on('click', function() {
+						var letter = $(this)[0].innerText;		
+						browse(letter);		
+            $("#navButton").click();
+					});
+          
+					d3.select('#navList').selectAll('a').data(str).enter().append('a').attr('href', '#').attr('class', 'list-group-item').text(function(d) { return d; });	
+					$("#navList a").on('click', function() {
+						var letter = $(this)[0].innerText;		
+						browse(letter);		
+					});          
+			}	  
+      
+      
+    </script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-54144106-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button id="navButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="visible-xs" style="margin-top: 15px;">
+		        <a class="navbar-link" href="/"><span class="glyphicon glyphicon-home"></span></a>
+		        <a class="navbar-link" id="myListLink" href="list.html"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+		        <a class="navbar-link" id="myListLink" href="map.html"><span class="glyphicon glyphicon-map-marker"></span></a>		  
+          </div>       
+          <div class="hidden-xs">
+	        <a class="navbar-link" href="/"><span class="glyphicon glyphicon-home"></span></a>
+	        <a class="navbar-link" id="myListLink" href="list.html"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+	        <a class="navbar-link" id="myListLink" href="map.html"><span class="glyphicon glyphicon-map-marker"></span></a>		  
+          <input id='fallChk' type='checkbox' checked='checked'>Fall</input>
+          <input id='springChk' type='checkbox' checked='checked'>Spring</input>
+          <input id='mitChk' type='checkbox' checked='checked'>MIT</input>
+          <input id='harvardChk' type='checkbox' checked='checked'>Harvard</input>	
+          </div>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul id="navMenu" class="visible-xs nav navbar-nav">
+            <li><input id='fallChk' type='checkbox' checked='checked'>Fall</input></li>
+            <li><input id='springChk' type='checkbox' checked='checked'>Spring</input></li>
+            <li><input id='mitChk' type='checkbox' checked='checked'>MIT</input></li>
+            <li><input id='harvardChk' type='checkbox' checked='checked'>Harvard</input></li>	            
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->    
+    <div id="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-sm-11 col-xs-12">
+          <div class="row">
+            <div id="resultCount" class="col-sm-11 col-xs-12">         
+            </div><!--/span-->			
+          </div><!--/row-->
+          <div class="row">
+            <div id="results" class="col-sm-11 col-xs-12">         
+            </div><!--/span-->			
+          </div><!--/row-->		  				
+        </div><!--/span-->
+        <div class="hidden-xs col-sm-1 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div id="navList" class="list-group">
+          </div>        
+      </div><!--/row-->        
+    </div>
+</body>
+</html>	

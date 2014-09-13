@@ -1,0 +1,42 @@
+{"category":"1","name":"Civil and Environmental Engineering"}
+{"category":"2","name":"Mechanical Engineering"}
+{"category":"3","name":"Materials Science and Engineering"}
+{"category":"4","name":"Architecture"}
+{"category":"5","name":"Chemistry"}
+{"category":"6","name":"Electrical Engineering and Computer Science"}
+{"category":"7","name":"Biology"}
+{"category":"8","name":"Physics"}
+{"category":"9","name":"Brain and Cognitive Sciences"}
+{"category":"10","name":"Chemical Engineering"}
+{"category":"11","name":"Urban Studies and Planning"}
+{"category":"12","name":"Earth, Atmospheric, and Planetary Sciences"}
+{"category":"14","name":"Economics"}
+{"category":"15","name":"Management"}
+{"category":"16","name":"Aeronautics and Astronautics"}
+{"category":"17","name":"Political Science"}
+{"category":"18","name":"Mathematics"}
+{"category":"20","name":"Biological Engineering"}
+{"category":"21","name":"Humanities"}
+{"category":"21A","name":"Anthropology","parent":"21"}
+{"category":"CMS","name":"Comparative Media Studies","parent":"21"}
+{"category":"21W","name":"Writing","parent":"21"}
+{"category":"21F","name":"Global Studies and Languages","parent":"21"}
+{"category":"21H","name":"History","parent":"21"}
+{"category":"21L","name":"Literature","parent":"21"}
+{"category":"21M","name":"Music and Theater Arts","parent":"21"}
+{"category":"WGS","name":"Women's and Gender Studies","parent":"21"}
+{"category":"22","name":"Nuclear Science and Engineering"}
+{"category":"24","name":"Linguistics and Philosophy"}
+{"category":"CC","name":"Concourse Program"}
+{"category":"CSB","name":"Computational and Systems Biology"}
+{"category":"EC","name":"Edgerton Center"}
+{"category":"ES","name":"Experimental Study Group"}
+{"category":"ESD","name":"Engineering Systems Division"}
+{"category":"HST","name":"Health Sciences and Technology"}
+{"category":"MAS","name":"Media Arts and Sciences"}                                                        
+{"category":"AS","name":"Aerospace Studies","parent":"ROTC"}                       
+{"category":"MS","name":"Military Science","parent":"ROTC"}                         
+{"category":"NS","name":"Naval Science","parent":"ROTC"}
+{"category":"NS","name":"STS","name":"Science, Technology, and Society"}
+{"category":"NS","name":"SWE","name":"Engineering School-Wide Electives"}
+{"category":"SP","name":"Special Programs"}
