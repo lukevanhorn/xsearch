@@ -19,7 +19,7 @@ This projects consists of 3 parts:
 2. Agenda iCal Generator.   Creates .ics files for each school.  This allows for importing into google calendar. 
 3. Website.  Search, browse and create user course lists.   
 
-# Step 1): Run the parsers.  
+## Step 1): Run the parsers.  
 
 If this isn't the first run, delete any files and subdirectories from the search and browse folders.
 
@@ -34,7 +34,7 @@ Full json formated course lists will be saved into the data directory.  Full-tex
 Zip both of these directories and copy to the www folder.  These will need to be extracted on the server once deployed.
 
 
-# Step 2): Generate iCal files
+## Step 2): Generate iCal files
 
 Edit the harvardcal.js and mitcal.js with the desired semester dates.
 
@@ -47,7 +47,7 @@ The ics files will be generated in the data folder.  Import these to google cale
 Generate a custom link in the google calendar settings area (include all school calendars), then update /www/public/calendar.html with the new iframe code. 
 
 
-# Step 3): Publish the Website to Azure
+## Step 3): Publish the Website to Azure
 
 If you don't have an account, create one for free here: http://www.windowsazure.com
 
