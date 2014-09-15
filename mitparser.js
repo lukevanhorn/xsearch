@@ -1,4 +1,9 @@
 'use strict'
+/* MIT Parser
+    Author: Luke Van Horn
+    License: MIT
+    Description: Parses MIT Course Catelog for the X-Search Tool
+*/
 var http = require('http');
 var fs = require('graceful-fs');
 var util = require('util');
@@ -163,7 +168,8 @@ function parse(html) {
 		.replace(/<img[^>]*>/g,'');//remove image tags
 
 	var result = html.match(/<!--s-->(.*)<!--end-->/);
-	var description = result ? result[1] : '';
+	var description = result ? result[1].replace('<br><br>','') : '';
+	description = description.
 	
 	html = html.replace(/<br>/g,''); //normalize any <br> tags to </br>	
 	

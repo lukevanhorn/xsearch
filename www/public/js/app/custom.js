@@ -123,9 +123,13 @@ function update() {
 				return false;
 			}
 			
-			if(!harvard && d.document && d.document.school && d.document.school.toLowerCase().indexOf('harvard') > -1) {
-				return false;
-			}
+			if(!harvard) {
+				if(d.document && d.document.school && d.document.school.toLowerCase().indexOf('mit') > -1) {
+					return true;
+				} else  {
+					return false;
+				}				
+			} 
 			
 			if(strict && d.document) {
   
@@ -172,8 +176,8 @@ function update() {
 		if(!d.document) {
 			return;
 		}
-		var semester = (d.document.semester ? [d.document.semester] : []);
-		var	faculty = d.document.faculty ? [d.document.faculty] : faculty;		
+		var semester = Array.isArray(d.document.semester) ? d.document.semester.join().toLowerCase() : d.document.semester;
+		var	faculty = Array.isArray(d.document.faculty) ? d.document.faculty.join() : d.document.faculty;		
 		var meets = (d.document.meets ? d.document.meets : '');
 		meets += d.document.time ? '<br />' + d.document.time : '';
 
@@ -184,7 +188,13 @@ function update() {
 		
 		var share = '<a target="_blank" href="http://' + window.location.host + '?id=' + d.id + '"><i class="glyphicon glyphicon-share"></i> share</a>';
 		
-		return d.document.school.toUpperCase() + ', (' + semester.join().toLowerCase() + ')' + '<br />' + faculty.join() + '<br />' + meets + '<br />' + link + '<br />' + share + '<br /><br />'; 
+		var content = d.document.school;
+		content += (semester ? ', (' + semester + ')' : '');
+		content += (faculty ? '<br />' + faculty : '');
+		content += (meets ? '<br />' + meets : '');
+		content += '<br />' + link + '<br />' + share + '<br /><br />'; 
+		
+		return content; 
 	});
 	
 	p.append('span').html(function(d) {

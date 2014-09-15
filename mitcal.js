@@ -1,9 +1,23 @@
+/* MIT Calendar Generator
+    Author: Luke Van Horn
+    License: MIT
+    Description: Generates .ics files for import into google calendar
+*/
+
 var fs = require('graceful-fs');
 var util = require('util');
 var async = require('async');
 var moment = require('moment');
 var es = require('event-stream');
 var readline = require('readline');
+
+
+/* change these based on the semester */
+
+/* fall 2014 */
+
+var semester = 'fall';
+var lastDay = '20141211T000000Z';
 
 var weekdays = {
 	'Monday':'20140908',
@@ -14,6 +28,25 @@ var weekdays = {
 	'Saturday':'20140906',
 	'Sunday':'20140907'	
 };
+
+
+/* spring 2015 */
+/*
+var semester = 'spring';
+var lastDay = '20150515T000000Z';
+var weekdays = {
+	'Monday':'20150209',
+	'Tuesday':'20150203',
+	'Wednesday':'20150204',
+	'Thursday':'20150205',
+	'Friday':'20150206',
+	'Saturday':'20150207',
+	'Sunday':'20150208'	
+};
+*/
+
+/* end of custom settings */
+
 
 var dayAbv = {
 	'Monday':'MO',
@@ -67,7 +100,7 @@ cFile.write('BEGIN:VCALENDAR' + '\n'
 			rd.pause();
 			line = line.replace('[{','{').replace('}]','}').replace('},','}');
 			var course = JSON.parse(line);
-			if(!course.meets || !course.time || !course.semester.match(/Fall/)) {
+			if(!course.meets || !course.time || !course.semester.toLowerCase().match(semester)) {
 				return rd.resume();
 			}
 			
@@ -123,7 +156,7 @@ function createEvent(course,callback) {
 	callback('BEGIN:VEVENT' 
 			+ '\n' + 'DTSTART;TZID=America/New_York:' + day + 'T' + start
 			+ '\n' + 'DTEND;TZID=America/New_York:' + day + 'T' + end
-			+ '\n' + 'RRULE:FREQ=WEEKLY;UNTIL=20141215T190000Z;BYDAY=' + byday
+			+ '\n' + 'RRULE:FREQ=WEEKLY;UNTIL=' + lastDay + ';BYDAY=' + byday
 			+ '\n' + 'DESCRIPTION:' + course.description 
 			+ '\n' + 'LOCATION:' + course.location
 			+ '\n' + 'STATUS:CONFIRMED'

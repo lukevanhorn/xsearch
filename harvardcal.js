@@ -1,3 +1,9 @@
+/* Harvard Agenda Generator
+    Author: Luke Van Horn
+    License: MIT
+    Description: Generates .ics files for import into google calendar
+*/
+
 var fs = require('graceful-fs');
 var util = require('util');
 var async = require('async');
@@ -6,8 +12,13 @@ var es = require('event-stream');
 var readline = require('readline');
 
 
-var schools = ['HarvardKennedySchool','HarvardGraduateSchoolofDesign','HarvardLawSchool','HarvardExtensionSchool','HarvardGraduateSchoolofEducation','HarvardDivinitySchool','HarvardSummerSchool','HarvardMedicalSchool','HarvardSchoolofPublicHealth','HarvardSchoolofDentalMedicine','FacultyofArtsandSciences','HarvardBusinessSchool-DoctoralPrograms','HarvardBusinessSchool-MBAProgram'];
-var names = ['Harvard Kennedy School','Harvard Graduate School of Design','Harvard Law School','Harvard Extension School','Harvard Graduate School of Education','Harvard Divinity School','Harvard Summer School','Harvard Medical School','Harvard School of Public Health','Harvard School of Dental Medicine','Faculty of Arts and Sciences','Harvard Business School - Doctoral Programs','Harvard Business School - MBA Program'];
+
+/* change these based on the semester */
+
+/* fall 2014 */
+
+var semester = 'fall';
+var lastDay = '20141204T000000Z';
 
 var weekdays = {
 	'Monday':'20140908',
@@ -18,6 +29,27 @@ var weekdays = {
 	'Saturday':'20140906',
 	'Sunday':'20140907'	
 };
+
+
+/* spring 2015 */
+/*
+var semester = 'spring';
+var lastDay = '20150429T000000Z';
+var weekdays = {
+	'Monday':'20150126',
+	'Tuesday':'20150127',
+	'Wednesday':'20150128',
+	'Thursday':'20150129',
+	'Friday':'20150130',
+	'Saturday':'20150131',
+	'Sunday':'20150201'	
+};
+*/
+
+/* end of custom settings */
+
+var schools = ['HarvardKennedySchool','HarvardGraduateSchoolofDesign','HarvardLawSchool','HarvardExtensionSchool','HarvardGraduateSchoolofEducation','HarvardDivinitySchool','HarvardSummerSchool','HarvardMedicalSchool','HarvardSchoolofPublicHealth','HarvardSchoolofDentalMedicine','FacultyofArtsandSciences','HarvardBusinessSchool-DoctoralPrograms','HarvardBusinessSchool-MBAProgram'];
+var names = ['Harvard Kennedy School','Harvard Graduate School of Design','Harvard Law School','Harvard Extension School','Harvard Graduate School of Education','Harvard Divinity School','Harvard Summer School','Harvard Medical School','Harvard School of Public Health','Harvard School of Dental Medicine','Faculty of Arts and Sciences','Harvard Business School - Doctoral Programs','Harvard Business School - MBA Program'];
 
 var dayAbv = {
 	'Monday':'MO',
@@ -72,7 +104,7 @@ async.eachSeries(schools, function(school, next) {
 				rd.pause();
 				line = line.replace('[{','{').replace('}]','}').replace('},','}');
 				var course = JSON.parse(line);
-				if(!course.meets || !course.time || !course.semester.match(/Fall 2014/)) {
+				if(!course.meets || !course.time || !course.semester.toLowerCase().match(semester)) {
 					return rd.resume();
 				}
 				
@@ -131,7 +163,7 @@ function createEvent(course,callback) {
 	callback('BEGIN:VEVENT' 
 			+ '\n' + 'DTSTART;TZID=America/New_York:' + day + 'T' + start
 			+ '\n' + 'DTEND;TZID=America/New_York:' + day + 'T' + end
-			+ '\n' + 'RRULE:FREQ=WEEKLY;UNTIL=20141215T190000Z;BYDAY=' + byday
+			+ '\n' + 'RRULE:FREQ=WEEKLY;UNTIL=' + lastDay + ';BYDAY=' + byday
 			+ '\n' + 'DESCRIPTION:' + course.description 
 			+ '\n' + 'LOCATION:' + course.location
 			+ '\n' + 'STATUS:CONFIRMED'

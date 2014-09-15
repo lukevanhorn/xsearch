@@ -1,5 +1,9 @@
 'use strict'
-
+/* Harvard Parser
+    Author: Luke Van Horn
+    License: MIT
+    Description: Parses Harvard Course Catelog for the X-Search Tool
+*/
 var fs = require('graceful-fs');
 var util = require('util');
 var async = require('async');
@@ -177,7 +181,7 @@ function extract(html, next) {
 };
 
 function parse(html) {
-	var fields = [ 'link', 'title', 'name', 'school', 'semester','faculty'];
+	var fields = [ 'link', 'title', 'name', 'school', 'semester', 'faculty'];
 
 	//remove line breaks
 	html = html.replace(/[\r\n\t]*/g,'')  //replace newline, carraige returns and tabs
@@ -191,8 +195,8 @@ function parse(html) {
 	//parse title, id, school, semester and link
 	var course = {};
 		
-	var result = html.match(/viewParam_q=id:(\w_\w+_\d+_\d+_.*)&amp;.*shape="rect">(.*)<\/a>\s+\((.*)\)<\/span><br\/>(.*) &nbsp;&nbsp; (.*\d{4})(.*)<a class="moredetails"/);	
-	
+	var result = html.match(/viewParam_q=id:(\w_\w+_\d+_\d+_.*)&amp;.*shape="rect">(.*)<\/a>\s+\((.*)\)<\/span><br\/>(.*)(?=&nbsp;)\s?&nbsp;&nbsp;\s?(.*)(?=&nbsp;)\s?&nbsp;&nbsp;\s?(?=<br\/>)?\s?(?:<br\/>)?\s?([^<]*)/);	
+		
 	var i = 0;
 	if(result) {
 		while(i < fields.length) {
@@ -203,10 +207,15 @@ function parse(html) {
 		course.id = course.link;
 	}
 	
-	if(course.faculty) {
-		result = course.faculty.match(/\s?&nbsp;&nbsp;\s?<br\/>(.*)<br\/>/);
-		course.faculty = result ? result[1] : '';
-	}
+	//if(course.semester && html.match(/<a class\="moredetails"/)) {
+	//	course.faculty = html.substring(html.indexOf(course.semester + course.semester.length), html.indexOf('<a class\="moredetails"'));
+	//	course.faculty = course.faculty.replace(/&nbsp;/,'').replace(/<br\/>/,'').trim();
+	//}
+	
+	//if(course.faculty) {
+	//	result = course.faculty.match(/\s?&nbsp;&nbsp;\s?<br\/>(.*)<br\/>/);
+	//	course.faculty = result ? result[1] : '';
+	//}
 	
 	course.description = html.substr(html.search(/\n/) + 1);	
 	
