@@ -4,7 +4,7 @@ Author: Luke Van Horn
 License: MIT
 
 
-Harvard / MIT course catelog parse and search tool.  See it live:  http://unisearch.azurewebsites.net
+Harvard / MIT course catelog parse and search tool.  See it live:  http://xsearch.azurewebsites.net
 
 Requirements:
 <pre>
