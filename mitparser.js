@@ -169,7 +169,6 @@ function parse(html) {
 
 	var result = html.match(/<!--s-->(.*)<!--end-->/);
 	var description = result ? result[1].replace('<br><br>','') : '';
-	description = description.
 	
 	html = html.replace(/<br>/g,''); //normalize any <br> tags to </br>	
 	
