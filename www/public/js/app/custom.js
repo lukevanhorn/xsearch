@@ -182,7 +182,7 @@ function update() {
 		meets += d.document.time ? '<br />' + d.document.time : '';
 
 		var link = '<a href="#" onclick="javascript: saveClass(\'' + d.id.trim() + '\',this);"><i class="glyphicon glyphicon-plus"></i> add to cart</a>';
-		if(myList && myList[+d.id]) {
+		if(myList && myList[d.id]) {
 			link = '<a href="#" onclick="javascript: removeClass(\'' + d.id.trim() + '\',this);"><i class="glyphicon glyphicon-minus"></i> remove from cart</a>';			
 		}
 		
