@@ -181,9 +181,9 @@ function update() {
 		var meets = (d.document.meets ? d.document.meets : '');
 		meets += d.document.time ? '<br />' + d.document.time : '';
 
-		var link = '<a href="#" onclick="javascript: saveClass(' + d.id + ',this);"><i class="glyphicon glyphicon-plus"></i> add to cart</a>';
+		var link = '<a href="#" onclick="javascript: saveClass(\'' + d.id.trim() + '\',this);"><i class="glyphicon glyphicon-plus"></i> add to cart</a>';
 		if(myList && myList[+d.id]) {
-			link = '<a href="#" onclick="javascript: removeClass(' + d.id + ',this);"><i class="glyphicon glyphicon-minus"></i> remove from cart</a>';			
+			link = '<a href="#" onclick="javascript: removeClass(\'' + d.id.trim() + '\',this);"><i class="glyphicon glyphicon-minus"></i> remove from cart</a>';			
 		}
 		
 		var share = '<a target="_blank" href="http://' + window.location.host + '?id=' + d.id + '"><i class="glyphicon glyphicon-share"></i> share</a>';
@@ -216,9 +216,9 @@ function saveClass(id,elem) {
 	}
 	
 	$.each(results, function(i,d) {
-		if(+d.id == id) {
+		if(d.id == id) {
 			myList[id] = d;
-			$(elem)[0].outerHTML = '<a href="#" onclick="javascript: removeClass(' + id + ');"><i class="glyphicon glyphicon-minus"></i> remove from cart</a>';
+			$(elem)[0].outerHTML = '<a href="#" onclick="javascript: removeClass(\'' + id.trim() + '\',this);"><i class="glyphicon glyphicon-minus"></i> remove from cart</a>';
 		}
 	});
 	

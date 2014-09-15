@@ -1,9 +1,5 @@
 'use strict'
-/* Harvard Parser
-    Author: Luke Van Horn
-    License: MIT
-    Description: Parses Harvard Course Catelog for the X-Search Tool
-*/
+
 var fs = require('graceful-fs');
 var util = require('util');
 var async = require('async');
@@ -35,10 +31,10 @@ var loadHtml = edge.func(function () {/*
 
 
 
-var pos = process.argv[2] || 0;
+var pos = +process.argv[2] || 0;
 var page = 25;
 var address = "https://coursecatalog.harvard.edu/icb/icb.do?keyword=CourseCatalog&panel=icb.pagecontent695860%3Arsearch%3Ffq_coordinated_semester_yr%3D%26fq_school_nm%3D%26q%3D%26sort%3Dcourse_title%2Basc%26start%3D0%26submit%3DSearch&pageid=icb.page335057&pageContentId=icb.pagecontent695860&view=search&viewParam_fq_coordinated_semester_yr=&viewParam_fq_school_nm=&viewParam_q=&viewParam_sort=course_title+asc&viewParam_start=POS&viewParam_submit=Search&viewParam_context=catalog";
-var max = 0;
+var max = pos;
 var data = {};
 var schools = [];
 var hFile = fs.createWriteStream('data/harvard.json');
@@ -58,7 +54,7 @@ function getNextPage() {
 			throw error;
 		}
 		
-		if(max == 0) {
+		if(max == pos) {
 			var result = html.match(/<span style="font-size: 80%; color: #666;">  \(of (.*)\)<\/span>/);
 			max = result ? +(result[1].replace(',','')) : 0;
 		}
@@ -110,21 +106,25 @@ function readFromFile() {
 function extract(html, next) {
 	
 	var result;
-	var pattern = /<tr class="course"|<\/tbody>/g;
+	var pattern = /<tr class="course"/g;
 	var first = 0;
 	var records = [];
 	
 	while((result = pattern.exec(html)) != null) {
 		if(first > 0) {				
-			var course = parse(html.substring(first,result.index));
-
-			records.push(course);			
+			try {
+				var course = parse(html.substring(first,result.index));
+				records.push(course);	
+			} catch(e) {
+				console.log(e);
+				console.log('error parsing: ' + html.substring(first,result.index));				
+			}		
 		}
 
 		first = result.index;
 	}
 	
-
+	
 	async.each(records, function(course, callback) {
 		var rec = JSON.stringify(course);
 		
@@ -206,16 +206,6 @@ function parse(html) {
 		
 		course.id = course.link;
 	}
-	
-	//if(course.semester && html.match(/<a class\="moredetails"/)) {
-	//	course.faculty = html.substring(html.indexOf(course.semester + course.semester.length), html.indexOf('<a class\="moredetails"'));
-	//	course.faculty = course.faculty.replace(/&nbsp;/,'').replace(/<br\/>/,'').trim();
-	//}
-	
-	//if(course.faculty) {
-	//	result = course.faculty.match(/\s?&nbsp;&nbsp;\s?<br\/>(.*)<br\/>/);
-	//	course.faculty = result ? result[1] : '';
-	//}
 	
 	course.description = html.substr(html.search(/\n/) + 1);	
 	

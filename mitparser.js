@@ -104,7 +104,7 @@ function readCategories(callback) {
 function extract(html, next) {
 	
 	var result;
-	var pattern = /<a name="[\d\w]{1,2}\.[\d\w]{3}"><\/a>|<\/tbody>/g;
+	var pattern = /<a name="[\d\w]{1,2}\.[\d\w]{1,5}"><\/a>|<\/tbody>/g;
 	var first = 0;
 	var records = [];
 	
@@ -164,27 +164,27 @@ function parse(html) {
 	}
 	
 	//remove line breaks
-	html = html.replace(/[\r\n\t]*/g,'')  //replace newline, carraige returns and tabs
-		.replace(/<img[^>]*>/g,'');//remove image tags
+	html = html.replace(/[\r\n\t]*/g,'');  //replace newline, carraige returns and tabs
 
-	var result = html.match(/<!--s-->(.*)<!--end-->/);
-	var description = result ? result[1].replace('<br><br>','') : '';
+	var result = html.match(/<img alt="______" src="\/icns\/hr.gif"><br>(.*)(?=<\/p>)/);
+	var description = result ? result[1] : '';
 	
-	html = html.replace(/<br>/g,''); //normalize any <br> tags to </br>	
-	
+	html = html.replace(/<br>/g,'') //normalize any <br> tags to </br>	
+			.replace(/<img[^>]*>/g,''); //image tags
+			
 	//parse id
-	result = html.match(/<a name="([\d\w]{1,2}\.[^"]*)"><\/a>/);
+	var result = html.match(/<a name="([\d\w]{1,2}\.[^"]*)"><\/a>/);
 	var course = { 
 					id: (result ? result[1] : ''),
 					school: 'MIT', 
 					subject: subject.name, 
 					semester: 'Fall',
-					description: description
+					description: description.replace(/^<br><br>/g, '')
 				};
 	
-	result = html.match(/<h3>([^<]*)</);
+	result = html.match(/<h3>(.*)(?=<\/h3>)/);
 	course.title = result ? result[1] : '';
-	
+
 	result = html.match(/<b>Lecture:<\/b> <i>([^<]*)<\/i> \(<a href="http:\/\/whereis.mit.edu\/map-jpg\?mapterms=\d*">(\d*-\d*)[^<]<\/a>\)/);
 
 	var i = 0;
