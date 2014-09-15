@@ -17,7 +17,7 @@ This projects consists of 3 parts:
 
 1. Parser(s).  These node.js apps read the course lists from the Harvard and MIT websites, parse the individual classes and create full-text search indexes.
 2. Agenda iCal Generator.   Creates .ics files for each school.  This allows for importing into google calendar. 
-3. Website.  Search, browse and create user lists.   
+3. Website.  Search, browse and create user course lists.   
 
 # Step 1): Run the parsers.  
 
@@ -56,6 +56,8 @@ Log into the portal and create a new website.  Use dropbox or git to deploy file
 Open the project in Monaco (VS Online) or ssh into the website VM and extract the search.zip and browse.zip into the root directories.   
 
 Note, webserver.js doesn't handle the static file serving and instead leverages IIS.  All static documents live in the public folder.  
+
+The user can save a list that uses local storage to persist data on a device / browser.  This simplifies the process and avoids user login and management.  
 
 
 
