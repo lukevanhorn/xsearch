@@ -333,6 +333,7 @@ function getJSON(url, data, onSuccess, onError, onComplete ) {
         data: data,
         dataType : 'json',
 		beforeSend : function() {
+			$("#status").html('');
 			d3.select("#results").selectAll('p').remove();
 			d3.select("#results").append('p').html('<img src="/images/load.gif" alt="loading" />'); 	
 		},
